@@ -38,6 +38,7 @@ public class Product {
     }
 
     public int getCurrentQuality(int passedDays) {
-        return 0;
+        int currentQuality = initialQuality - passedDays * decreaseStep;
+        return Math.max(currentQuality, 0);
     }
 }
