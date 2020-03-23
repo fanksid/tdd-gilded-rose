@@ -1,5 +1,8 @@
 package cn.xpbootcamp.gilded_rose;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class Product {
     private static final int MAX_QUALITY = 50;
     private static final int MIN_QUALITY = 0;
@@ -21,33 +24,35 @@ public class Product {
     }
 
     public int getCurrentQuality(int passedDays) {
-        int changedQuality = passedDays * calculateStep(passedDays);
-
         if ("Sulfuras".equals(type)) {
             return initialQuality;
         }
 
-        if ("Backstage_Pass".equals(type) && passedDays > sellIn) {
-            return 0;
+        int changedQuality = passedDays * calculateStep(passedDays);
+        int increasedQuality = min(initialQuality + changedQuality, MAX_QUALITY);
+        if ("Backstage_Pass".equals(type)) {
+            return passedDays > sellIn ? 0 : increasedQuality;
         }
 
-        if ("Aged_Brie".equals(type) || "Backstage_Pass".equals(type)) {
-            return Math.min(initialQuality + changedQuality, MAX_QUALITY);
+        if ("Aged_Brie".equals(type)) {
+            return increasedQuality;
         }
-        return Math.max(initialQuality - changedQuality, MIN_QUALITY);
+
+        return max(initialQuality - changedQuality, MIN_QUALITY);
     }
 
     private int calculateStep(int passedDays) {
-        int decreaseStep = 1;
-        if ("Backstage_Pass".equals(type) && sellIn - passedDays > 5 && sellIn - passedDays <= 10) {
+        int leftDays = sellIn - passedDays;
+        if ("Backstage_Pass".equals(type) && leftDays > 5 && leftDays <= 10) {
             return 2;
         }
-        if ("Backstage_Pass".equals(type) && sellIn - passedDays >=0 && sellIn - passedDays <= 5) {
+        if ("Backstage_Pass".equals(type) && leftDays >= 0 && leftDays <= 5) {
             return 3;
         }
+
         if (passedDays > sellIn) {
-            return decreaseStep * 2;
+            return 2;
         }
-        return decreaseStep;
+        return 1;
     }
 }
