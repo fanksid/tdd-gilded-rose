@@ -46,11 +46,25 @@ public class ProductTest {
 
     @Test
     void should_quality_increase_when_Aged_Brie_passed_days_increase() {
-        Product product = new Product("Aged_Brie", 20, 50, 1);
+        Product product = new Product("Aged_Brie", 20, 40, 1);
 
         int qualityOfFewDays = product.getCurrentQuality(1);
         int qualityOfManyDays = product.getCurrentQuality(2);
 
+        assertTrue(qualityOfFewDays >=0);
+        assertTrue(qualityOfFewDays <=50);
+        assertTrue(qualityOfManyDays >=0);
+        assertTrue(qualityOfManyDays <=50);
         assertTrue(qualityOfFewDays < qualityOfManyDays);
+    }
+
+    @Test
+    void should_quality_increase_but_less_than_50_when_Aged_Brie_passed_days_increase() {
+        Product product = new Product("Aged_Brie", 20, 40, 1);
+
+        int qualityOfManyDays = product.getCurrentQuality(20);
+
+        assertTrue(qualityOfManyDays >=0);
+        assertTrue(qualityOfManyDays <=50);
     }
 }

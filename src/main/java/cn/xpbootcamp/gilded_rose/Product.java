@@ -38,10 +38,9 @@ public class Product {
 
     public int getCurrentQuality(int passedDays) {
         if ("Aged_Brie".equals(type)) {
-            return initialQuality + passedDays * calculateDecreaseStep(passedDays);
+            return Math.min(initialQuality + passedDays * calculateDecreaseStep(passedDays), 50);
         }
-        int currentQuality = initialQuality - passedDays * calculateDecreaseStep(passedDays);
-        return Math.max(currentQuality, 0);
+        return Math.max(initialQuality - passedDays * calculateDecreaseStep(passedDays), 0);
     }
 
     private int calculateDecreaseStep(int passedDays) {
