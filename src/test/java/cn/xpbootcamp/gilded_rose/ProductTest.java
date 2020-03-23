@@ -97,4 +97,13 @@ public class ProductTest {
 
         assertEquals(3, qualityOfManyDays - qualityOfFewDays);
     }
+
+    @Test
+    void should_quality_return_zero_when_backstage_pass_pass_sell_in_date() {
+        Product product = new Product("Backstage_Pass", 10, 0);
+
+        int currentQuality = product.getCurrentQuality(11);
+
+        assertEquals(0, currentQuality);
+    }
 }

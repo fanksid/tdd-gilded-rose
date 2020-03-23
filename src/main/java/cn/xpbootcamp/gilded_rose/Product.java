@@ -27,6 +27,10 @@ public class Product {
             return initialQuality;
         }
 
+        if ("Backstage_Pass".equals(type) && passedDays > sellIn) {
+            return 0;
+        }
+
         if ("Aged_Brie".equals(type) || "Backstage_Pass".equals(type)) {
             return Math.min(initialQuality + changedQuality, MAX_QUALITY);
         }
