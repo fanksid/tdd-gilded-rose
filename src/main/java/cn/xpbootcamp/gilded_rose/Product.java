@@ -8,23 +8,20 @@ public class Product {
 
     private int initialQuality;
 
-    private int decreaseStep;
-
     private String type;
 
-    public Product(int sellIn, int initialQuality, int decreaseStep) {
+    public Product(int sellIn, int initialQuality) {
         this.sellIn = sellIn;
         this.initialQuality = initialQuality;
-        this.decreaseStep = decreaseStep;
     }
 
-    public Product(String type, int sellIn, int initialQuality, int decreaseStep) {
-        this(sellIn, initialQuality, decreaseStep);
+    public Product(String type, int sellIn, int initialQuality) {
+        this(sellIn, initialQuality);
         this.type = type;
     }
 
     public int getCurrentQuality(int passedDays) {
-        int changedQuality = passedDays * calculateDecreaseStep(passedDays);
+        int changedQuality = passedDays * calculateStep(passedDays);
 
         if ("Sulfuras".equals(type)) {
             return initialQuality;
@@ -36,7 +33,8 @@ public class Product {
         return Math.max(initialQuality - changedQuality, MIN_QUALITY);
     }
 
-    private int calculateDecreaseStep(int passedDays) {
+    private int calculateStep(int passedDays) {
+        int decreaseStep = 1;
         if (passedDays > sellIn) {
             return decreaseStep * 2;
         }
