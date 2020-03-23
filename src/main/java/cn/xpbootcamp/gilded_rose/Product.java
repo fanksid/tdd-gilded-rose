@@ -26,6 +26,10 @@ public class Product {
     public int getCurrentQuality(int passedDays) {
         int changedQuality = passedDays * calculateDecreaseStep(passedDays);
 
+        if ("Sulfuras".equals(type)) {
+            return initialQuality;
+        }
+
         if ("Aged_Brie".equals(type)) {
             return Math.min(initialQuality + changedQuality, MAX_QUALITY);
         }

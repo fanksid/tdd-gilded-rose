@@ -67,4 +67,14 @@ public class ProductTest {
         assertTrue(qualityOfManyDays >=0);
         assertTrue(qualityOfManyDays <=50);
     }
+
+    @Test
+    void should_quality_no_change_for_Sulfuras_given_different_passed_days() {
+        Product product = new Product("Sulfuras", 20, 40, 1);
+
+        int qualityOfFewDays = product.getCurrentQuality(10);
+        int qualityOfManyDays = product.getCurrentQuality(200);
+
+        assertEquals(qualityOfFewDays, qualityOfManyDays);
+    }
 }
