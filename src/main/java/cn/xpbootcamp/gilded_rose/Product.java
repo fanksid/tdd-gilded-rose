@@ -7,37 +7,39 @@ public class Product {
 
     private int decreaseStep;
 
+    private String type;
+
     public Product(int sellIn, int initialQuality, int decreaseStep) {
         this.sellIn = sellIn;
         this.initialQuality = initialQuality;
         this.decreaseStep = decreaseStep;
     }
 
-    public int getSellIn() {
-        return sellIn;
+    public Product(String type, int sellIn, int initialQuality, int decreaseStep) {
+        this(sellIn, initialQuality, decreaseStep);
+        this.type = type;
     }
 
-    public void setSellIn(int sellIn) {
-        this.sellIn = sellIn;
+    public int getSellIn() {
+        return sellIn;
     }
 
     public int getInitialQuality() {
         return initialQuality;
     }
 
-    public void setInitialQuality(int initialQuality) {
-        this.initialQuality = initialQuality;
-    }
-
     public int getDecreaseStep() {
         return decreaseStep;
     }
 
-    public void setDecreaseStep(int decreaseStep) {
-        this.decreaseStep = decreaseStep;
+    public String getType() {
+        return type;
     }
 
     public int getCurrentQuality(int passedDays) {
+        if ("Aged_Brie".equals(type)) {
+            return initialQuality + passedDays * calculateDecreaseStep(passedDays);
+        }
         int currentQuality = initialQuality - passedDays * calculateDecreaseStep(passedDays);
         return Math.max(currentQuality, 0);
     }

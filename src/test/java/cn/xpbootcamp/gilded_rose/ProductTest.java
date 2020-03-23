@@ -43,4 +43,14 @@ public class ProductTest {
 
         assertEquals(2, decreasedQualityAfterSellIn / decreasedQualityBeforeSellIn);
     }
+
+    @Test
+    void should_quality_increase_when_Aged_Brie_passed_days_increase() {
+        Product product = new Product("Aged_Brie", 20, 50, 1);
+
+        int qualityOfFewDays = product.getCurrentQuality(1);
+        int qualityOfManyDays = product.getCurrentQuality(2);
+
+        assertTrue(qualityOfFewDays < qualityOfManyDays);
+    }
 }
