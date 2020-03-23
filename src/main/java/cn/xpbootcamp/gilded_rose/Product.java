@@ -38,6 +38,9 @@ public class Product {
         if ("Backstage_Pass".equals(type) && sellIn - passedDays > 5 && sellIn - passedDays <= 10) {
             return 2;
         }
+        if ("Backstage_Pass".equals(type) && sellIn - passedDays >=0 && sellIn - passedDays <= 5) {
+            return 3;
+        }
         if (passedDays > sellIn) {
             return decreaseStep * 2;
         }

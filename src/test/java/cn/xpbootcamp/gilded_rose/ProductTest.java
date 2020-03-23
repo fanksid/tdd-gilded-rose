@@ -87,4 +87,14 @@ public class ProductTest {
 
         assertEquals(2, qualityOfManyDays - qualityOfFewDays);
     }
+
+    @Test
+    void should_quality_of_Backstage_Pass_increase_3_everyday_before_5_days_of_sell_in() {
+        Product product = new Product("Backstage_Pass", 10, 0);
+
+        int qualityOfFewDays = product.getCurrentQuality(6);
+        int qualityOfManyDays = product.getCurrentQuality(7);
+
+        assertEquals(3, qualityOfManyDays - qualityOfFewDays);
+    }
 }
