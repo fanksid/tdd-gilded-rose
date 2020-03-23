@@ -1,6 +1,9 @@
 package cn.xpbootcamp.gilded_rose;
 
 public class Product {
+    private static final int MAX_QUALITY = 50;
+    private static final int MIN_QUALITY = 0;
+
     private int sellIn;
 
     private int initialQuality;
@@ -20,27 +23,13 @@ public class Product {
         this.type = type;
     }
 
-    public int getSellIn() {
-        return sellIn;
-    }
-
-    public int getInitialQuality() {
-        return initialQuality;
-    }
-
-    public int getDecreaseStep() {
-        return decreaseStep;
-    }
-
-    public String getType() {
-        return type;
-    }
-
     public int getCurrentQuality(int passedDays) {
+        int changedQuality = passedDays * calculateDecreaseStep(passedDays);
+
         if ("Aged_Brie".equals(type)) {
-            return Math.min(initialQuality + passedDays * calculateDecreaseStep(passedDays), 50);
+            return Math.min(initialQuality + changedQuality, MAX_QUALITY);
         }
-        return Math.max(initialQuality - passedDays * calculateDecreaseStep(passedDays), 0);
+        return Math.max(initialQuality - changedQuality, MIN_QUALITY);
     }
 
     private int calculateDecreaseStep(int passedDays) {
