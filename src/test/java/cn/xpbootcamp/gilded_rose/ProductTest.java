@@ -1,6 +1,7 @@
 package cn.xpbootcamp.gilded_rose;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductTest {
@@ -31,5 +32,15 @@ public class ProductTest {
         int qualityOfManyDays = product.getCurrentQuality(20);
 
         assertTrue(qualityOfFewDays > qualityOfManyDays);
+    }
+
+    @Test
+    void should_quality_decrease_twice_when_after_sell_in_date() {
+        Product product = new Product(20, 50, 1);
+
+        int decreasedQualityBeforeSellIn = product.getCurrentQuality(2) - product.getCurrentQuality(1);
+        int decreasedQualityAfterSellIn = product.getCurrentQuality(22) - product.getCurrentQuality(21);
+
+        assertEquals(2, decreasedQualityAfterSellIn / decreasedQualityBeforeSellIn);
     }
 }
