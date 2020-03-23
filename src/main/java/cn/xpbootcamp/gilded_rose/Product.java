@@ -27,7 +27,7 @@ public class Product {
             return initialQuality;
         }
 
-        if ("Aged_Brie".equals(type)) {
+        if ("Aged_Brie".equals(type) || "Backstage_Pass".equals(type)) {
             return Math.min(initialQuality + changedQuality, MAX_QUALITY);
         }
         return Math.max(initialQuality - changedQuality, MIN_QUALITY);
@@ -35,6 +35,9 @@ public class Product {
 
     private int calculateStep(int passedDays) {
         int decreaseStep = 1;
+        if ("Backstage_Pass".equals(type) && sellIn - passedDays > 5 && sellIn - passedDays <= 10) {
+            return 2;
+        }
         if (passedDays > sellIn) {
             return decreaseStep * 2;
         }

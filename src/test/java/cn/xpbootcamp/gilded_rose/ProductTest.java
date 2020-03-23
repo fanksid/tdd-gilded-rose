@@ -51,10 +51,10 @@ public class ProductTest {
         int qualityOfFewDays = product.getCurrentQuality(1);
         int qualityOfManyDays = product.getCurrentQuality(2);
 
-        assertTrue(qualityOfFewDays >=0);
-        assertTrue(qualityOfFewDays <=50);
-        assertTrue(qualityOfManyDays >=0);
-        assertTrue(qualityOfManyDays <=50);
+        assertTrue(qualityOfFewDays >= 0);
+        assertTrue(qualityOfFewDays <= 50);
+        assertTrue(qualityOfManyDays >= 0);
+        assertTrue(qualityOfManyDays <= 50);
         assertTrue(qualityOfFewDays < qualityOfManyDays);
     }
 
@@ -64,8 +64,8 @@ public class ProductTest {
 
         int qualityOfManyDays = product.getCurrentQuality(20);
 
-        assertTrue(qualityOfManyDays >=0);
-        assertTrue(qualityOfManyDays <=50);
+        assertTrue(qualityOfManyDays >= 0);
+        assertTrue(qualityOfManyDays <= 50);
     }
 
     @Test
@@ -76,5 +76,15 @@ public class ProductTest {
         int qualityOfManyDays = product.getCurrentQuality(200);
 
         assertEquals(qualityOfFewDays, qualityOfManyDays);
+    }
+
+    @Test
+    void should_quality_of_Backstage_Pass_increase_2_everyday_before_10_days_of_sell_in() {
+        Product product = new Product("Backstage_Pass", 20, 10);
+
+        int qualityOfFewDays = product.getCurrentQuality(12);
+        int qualityOfManyDays = product.getCurrentQuality(13);
+
+        assertEquals(2, qualityOfManyDays - qualityOfFewDays);
     }
 }
